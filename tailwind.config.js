@@ -8,9 +8,9 @@ module.exports = {
       colors:{
         amazonclone:{
           background:"#EAEDED",
-          light_blue:"232F3A",
+          light_blue:"#232F3A",
           yellow:"#FEBD69",
-          DEFAULT:"131921"
+          DEFAULT:"#131921"
         }
       }
     },
