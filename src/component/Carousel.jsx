@@ -4,7 +4,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 const Carousel = () => {
   return (
-    <div className="h-[600px] bg-white">
+    <div className="h-[500px] bg-white">
       <Swiper
         loop={true}
         spaceBetween={0}
@@ -32,7 +32,7 @@ const Carousel = () => {
           <img src={"../images/carousel_5.jpg"} alt="image5" />
         </SwiperSlide>
       </Swiper>
-      <div className="h-[30%] bg-gradient-to-b from-stone-900"/>
+      <div className="h-[50%] bg-gradient-to-b from-stone-900"/>
     </div>
   );
 };
