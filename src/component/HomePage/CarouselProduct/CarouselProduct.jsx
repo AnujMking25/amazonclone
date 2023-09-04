@@ -1,4 +1,5 @@
 import React from 'react'
+import { NavLink } from 'react-router-dom'
 import { Navigation } from 'swiper/modules'
 import {Swiper, SwiperSlide } from 'swiper/react'
     
@@ -12,11 +13,13 @@ import {Swiper, SwiperSlide } from 'swiper/react'
         navigation={true}
         modules={[Navigation]}
         >
-            {Array.from({length:9},(_,i)=>{
-               return <SwiperSlide key={i}>
+            {Array.from({length:9},(_,i)=>
+                <SwiperSlide key={i}>
+                <NavLink to={`/product/${i}`}>
                 <img src={`../images/product_${i}_small.jpg`} alt={`product_Image${i}`} />    
-            </SwiperSlide>
-            })}
+                </NavLink>
+                </SwiperSlide>
+            )}
         </Swiper>
         </div>
       )

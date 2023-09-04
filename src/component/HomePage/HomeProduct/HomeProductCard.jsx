@@ -1,6 +1,6 @@
 import React from 'react'
 
-const ProductCard = ({title,imageUrl,link}) => {
+const HomeProductCard = ({title,imageUrl,link}) => {
   return (
     <div className='h-[420px] bg-white z-30 m-3'>
     <div className='text-lg xl:text-xl font-semibold ml-4 mt-4'>{title}</div>
@@ -12,4 +12,4 @@ const ProductCard = ({title,imageUrl,link}) => {
   )
 }
 
-export default ProductCard
+export default HomeProductCard
