@@ -9,8 +9,8 @@
         "brand": "Lee Child", 
         "avgRating": 4,
         "ratings": 24089,
-        "price": 11.00,
-        "oldPrice": 22.00,
+        "price": 191.00,
+        "oldPrice": 422.00,
         "badge": "seller"
     },
     "1" :{
@@ -23,8 +23,8 @@
         "description" : "The 2023 edition takes readers on a journey that's out of this world! ",
         "avgRating": 5,
         "ratings": 929,
-        "price": 8.50,
-        "oldPrice": 22.00,
+        "price": 308.50,
+        "oldPrice": 692.00,
         "quantity": 0,
         "badge": "choice"
     },
@@ -38,8 +38,8 @@
         "description" : "Give them the simplest cookbook ever this Christmas . . . Jamie's back to basics with over 120 simple, delicious, ONE pan recipes",
         "avgRating": 4,
         "ratings": 2993,
-        "price": 13.00,
-        "oldPrice": 23.00,
+        "price": 123.00,
+        "oldPrice": 523.00,
         "badge": "choice"
     },
     "3" :{
@@ -52,8 +52,8 @@
         "brand": "Richard Osman", 
         "avgRating": 5,
         "ratings": 29283,
-        "price": 10.00,
-        "oldPrice": 20.00
+        "price": 100.00,
+        "oldPrice": 320.00
 
     },
     "4" :{
@@ -66,8 +66,8 @@
         "brand": "Jordan Moore", 
         "avgRating": 4,
         "ratings": 885,
-        "price": 10.90,
-        "oldPrice": 13.99,
+        "price": 105.90,
+        "oldPrice": 213.99,
         "badge": "limited"
     },
     "5" :{
@@ -80,8 +80,8 @@
         "brand": "Colleen Hoover", 
         "avgRating": 4,
         "ratings": 44402,
-        "price": 7.00,
-        "oldPrice": 14.99,
+        "price": 475.00,
+        "oldPrice": 1400.90,
         "badge": "choice"
     },
     "6" :{
@@ -94,8 +94,8 @@
         "brand": "David Walliams", 
         "avgRating": 5,
         "ratings": 877,
-        "price": 7.00,
-        "oldPrice": 14.99,
+        "price": 457.00,
+        "oldPrice": 147.99,
         "badge": "choice"
     },
     "7" :{
@@ -108,8 +108,8 @@
         "brand": "Bonnie Garmus", 
         "avgRating": 4,
         "ratings": 62749,
-        "price": 8.00,
-        "oldPrice": 16.99
+        "price": 348.00,
+        "oldPrice": 716.99
     },
     "8" :{
         "id" : 8,
@@ -121,8 +121,8 @@
         "brand": "Storm Dunlop", 
         "avgRating": 4,
         "ratings": 134,
-        "price": 4.79,
-        "oldPrice": 6.99,
+        "price": 344.79,
+        "oldPrice": 676.99,
         "badge": "choice"
     },
     "9" :{
@@ -135,8 +135,8 @@
         "brand": "Amazon", 
         "avgRating": 4,
         "ratings": 17602,
-        "price": 34.99,
-        "oldPrice": 40.99,
+        "price": 334.99,
+        "oldPrice": 640.99,
         "badge": "choice"
     },
     "10" :{
@@ -149,8 +149,8 @@
         "brand": "Hugo Boss", 
         "avgRating": 3,
         "ratings": 10,
-        "price": 42.95,
-        "oldPrice": 45.00
+        "price": 342.95,
+        "oldPrice": 545.00
     },
     "11" :{
         "id" : 11,

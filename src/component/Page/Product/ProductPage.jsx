@@ -23,7 +23,7 @@ const ProductPage = () => {
 if(!product)return <h1>Loading...</h1>
   return (product &&
     <div className='h-screen bg-amazonclone-background'>
-      <div className='min-w-[800px] max-w-[1500px] m-auto bg-orange-400' >
+      <div className='min-w-[800px] max-w-[1500px] m-auto p-4' >
         <div className='grid grid-cols-10 gap-2'>
           {/* Left Side */}
         <ProductPageLeft imageUrl={product.image}/>

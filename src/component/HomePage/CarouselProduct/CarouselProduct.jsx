@@ -1,9 +1,10 @@
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink} from 'react-router-dom'
 import { Navigation } from 'swiper/modules'
 import {Swiper, SwiperSlide } from 'swiper/react'
     
     const CarouselProduct = () => {
+     
       return (
         <div className='bg-white m-3'>
         <div className='text-2xl font-semibold p-3'>Best Books</div>
