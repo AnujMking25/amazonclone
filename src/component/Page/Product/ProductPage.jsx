@@ -1,32 +1,21 @@
-import React, {useState, useEffect } from 'react'
-import { useParams } from 'react-router-dom'
-import GetApi from '../../../CallApi/GetApi';
+import React from 'react'
+import { useLocation} from 'react-router-dom'
 import ProductPageLeft from './ProductPageLeft';
 import ProductPageMiddle from './ProductPageMiddle';
 import ProductPageRightSide from './ProductPageRightSide';
 
 const ProductPage = () => {
-  const [product, setProduct] = useState(null)
-  const {id}=useParams();
-  // console.log(id);
+ const location=useLocation();
+  const product=location.state.product;
 
-  const getProduct=()=>{
-    GetApi(`data/products.json`)
-    .then((products)=>{
-      setProduct(products[id])
-    })
-  }
-  useEffect(()=>{
-  getProduct();
-});
+console.log("useLocation===>>>",product);  
 
-if(!product)return <h1>Loading...</h1>
   return (product &&
     <div className='h-screen bg-amazonclone-background'>
       <div className='min-w-[800px] max-w-[1500px] m-auto p-4' >
         <div className='grid grid-cols-10 gap-2'>
           {/* Left Side */}
-        <ProductPageLeft imageUrl={product.image}/>
+        <ProductPageLeft imageUrl={product.imageUrl}/>
           {/* Middle */}
           <ProductPageMiddle product={product}/> 
           {/* Rigth */}
