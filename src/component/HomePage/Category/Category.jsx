@@ -9,8 +9,7 @@ const Category = () => {
         pathname:"search",
         search:`${
           createSearchParams({
-            category: `${category}`,
-            searchTerm:``
+            category: `${category}`
           })
         }`
       })
@@ -24,7 +23,7 @@ const Category = () => {
         navigation={true}
         modules={[Navigation]}
         >
-            <SwiperSlide onClick={()=>{searchCategory("Deals")}} className='cursor-pointer'>
+            <SwiperSlide onClick={()=>{searchCategory("All")}} className='cursor-pointer'>
                 <img src={'../images/category_0.jpg'} alt='category1'/>
             </SwiperSlide>
             <SwiperSlide onClick={()=>{searchCategory("Amazon")}} className='cursor-pointer'>
@@ -33,7 +32,7 @@ const Category = () => {
             <SwiperSlide onClick={()=>{searchCategory("Fashion")}} className='cursor-pointer'> 
                 <img src={'../images/category_2.jpg'} alt='category3'/>
             </SwiperSlide>
-            <SwiperSlide onClick={()=>{searchCategory("Computers")}} className='cursor-pointer'>
+            <SwiperSlide onClick={()=>{searchCategory("Computer")}} className='cursor-pointer'>
                 <img src={'../images/category_3.jpg'} alt='category4'/>
             </SwiperSlide>
             <SwiperSlide onClick={()=>{searchCategory("Home")}} className='cursor-pointer'>

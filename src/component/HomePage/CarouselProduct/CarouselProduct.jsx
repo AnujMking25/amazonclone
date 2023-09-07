@@ -6,7 +6,7 @@ import {Swiper, SwiperSlide } from 'swiper/react'
     const CarouselProduct = () => {
      const [products,setProduct]=useState();
       const getAllProducts=async()=>{
-        const getProducts=await axios('http://localhost:4000/admin/getProduct');
+        const getProducts=await axios('http://localhost:4000/admin/getProduct/Book');
         console.log(getProducts.data);
         const currProducts=getProducts.data.map((product,i)=>{
           return <SwiperSlide key={product._id}>
@@ -24,7 +24,7 @@ import {Swiper, SwiperSlide } from 'swiper/react'
         <div className='bg-white m-3'>
         <div className='text-2xl font-semibold p-3'>Best Books</div>
         <Swiper
-        slidesPerView={7}
+        slidesPerView={6}
         spaceBetween={10}
         navigation={true}
         modules={[Navigation]}
