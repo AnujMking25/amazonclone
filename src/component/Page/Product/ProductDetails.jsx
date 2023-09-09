@@ -9,6 +9,7 @@ const ProductDetails = ({product,ratings}) => {
         <div className='text-sm xl:text-base mb-1'>by <span className='text-blue-500'>{product.brand}</span></div>
         {ratings && <div className='text-sm xl:text-base mb-1'>
         <ProductRating avgRating={product.avgrating} ratings={product.rating}/></div>}
+        {!ratings && <div>₹{product.price}</div>}
         <div className='text-xs xl:text-sm font-bold mb-1'>{product.attribute}</div>
         <div><ProductBadge badge={product.badge}/></div>
     </div>

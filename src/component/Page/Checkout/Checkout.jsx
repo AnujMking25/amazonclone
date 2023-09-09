@@ -1,21 +1,30 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import ProductPageMiddle from '../Product/ProductPageMiddle';
 
 const Checkout = () => {
   const [cartItems,setCartItems]=useState();
 
+  const onCartDeleteHandler=async(prodId)=>{
+    console.log('ProdId is ===>>>',prodId);
+    const deleteCartItem=await axios.delete(`http://localhost:4000/cart/${prodId}`)
+    console.log(deleteCartItem.data);
+  }
   const getCartProductI=async()=>{
     const cartProducts=await axios('http://localhost:4000/cart');
-    console.log(cartProducts.data);
+    // console.log(cartProducts.data);
+
     const cart= cartProducts.data.map((cartProduct)=>{
       // console.log(cartProduct.productId);
       const cProduct=cartProduct.productId;
-       return <div className="text-lg xl:text-xl text-right mb-4 mr-4" key={cProduct._id}>
-            <img src={cProduct.imageUrl} alt={cProduct.title} />
-            <p>{cProduct.title}</p>     
-              <span className="font-semibold">
-               ₹{cProduct.price}
-              </span>
+      const prodId=cProduct._id;
+       return <div className=" grid grid-cols-10 gap-2" key={cProduct._id} >
+           <div className='col-span-3 flex justify-center items-center'>
+              <img src={cProduct.imageUrl} alt={cProduct.title} />
+           </div>
+          
+            <ProductPageMiddle product={cProduct} rating={"no"} onCartDelete={()=> onCartDeleteHandler(prodId)} />
+           
             </div>
     })
     // console.log(cart);
@@ -25,9 +34,9 @@ const Checkout = () => {
     getCartProductI();
   },[])
   return (
-    <div className="h-screen bg-amazonclone-background">
-      <div className="min-w-[1000px] max-w-[1500px] m-auto pt-8">
-        <div className="grid grid-cols-8 gap-10">
+    <div className=" bg-amazonclone-background">
+      <div className="min-w-[1000px] max-w-[1500px]  pt-8">
+        <div className="grid grid-cols-8 gap-10 p-3">
           {/* Products */}
           <div className="col-span-6 bg-white ">
             <div className="text-2xl xl:text-3xl m-4 divide-y-2 divide-gray-200 p-2">

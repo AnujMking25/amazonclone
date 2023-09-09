@@ -40,14 +40,14 @@ const SignIn = () => {
         </div>
       </div>
 
-      <div className=" mt-6 w-[30%] mx-auto text-center text-gray-500 text-sm divide-y">
+      {signUp && <div className=" mt-6 w-[30%] mx-auto text-center text-gray-500 text-sm divide-y">
         <button className="pl-2 pr-2 bg-white">New to Amazon?</button>
         <p className="-mt-2"></p>
-      </div>
+      </div>}
 
       <div className="w-[30%] mx-auto mt-2">
         <button onClick={()=>{setSignUp(!signUp)}} className="border border-gray-300  w-full p-1 mt-3 text-sm xl:text-md rounded-lg hover:bg-gray-200">
-          Create your Amazon account
+         {signUp ? 'Create your Amazon account':'SignUp'}
         </button>
       </div>
     </div>
