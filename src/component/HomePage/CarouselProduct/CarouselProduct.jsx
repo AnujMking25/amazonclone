@@ -2,13 +2,13 @@ import React, { useEffect, useState } from 'react'
 import {Link} from 'react-router-dom'
 import { Navigation } from 'swiper/modules'
 import {Swiper, SwiperSlide } from 'swiper/react'
-    import axios from 'axios'
+import axios from 'axios'
     const CarouselProduct = () => {
      const [products,setProduct]=useState();
       const getAllProducts=async()=>{
         const getProducts=await axios('http://localhost:4000/admin/getProduct/Book');
-        console.log(getProducts.data);
-        const currProducts=getProducts.data.map((product,i)=>{
+        // console.log(getProducts.data);
+        const currProducts=getProducts.data.map((product)=>{
           return <SwiperSlide key={product._id}>
           <Link to={`/product`} state={{product}}>
           <img src={`${product.imageUrl}`} alt={product.imageUrl} />    
@@ -29,9 +29,7 @@ import {Swiper, SwiperSlide } from 'swiper/react'
         navigation={true}
         modules={[Navigation]}
         >
-           
-                {products}
-            
+           {products} 
         </Swiper>
         </div>
       )

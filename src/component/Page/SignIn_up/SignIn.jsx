@@ -3,7 +3,7 @@ import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { useDispatch } from "react-redux";
 import { AuthSliceAction } from "../../../Store/AuthSlice";
-import Cookies from 'js-cookie';
+// import Cookies from 'js-cookie';
 
 const SignIn = () => {
   const [signUp, setSignUp] = useState(true);
@@ -13,21 +13,32 @@ const SignIn = () => {
   e.preventDefault();
 const email=e.target.email.value;
 const password=e.target.password.value;
-const obj={email,password};
-document.cookie=JSON.stringify(obj);
-console.log("Email=>",email, "password==>>",password );
+let SLurl;
+let obj={email,password};
+
+if(e.target.confirmPassword.value){
+SLurl='http://localhost:4000/auth/signup'
+const confirmPassword=e.target.confirmPassword.value;
+obj={...obj,confirmPassword};
+}else{
+  SLurl='http://localhost:4000/auth/login';
+}
+
+
+// document.cookie=JSON.stringify(obj);
+// console.log("Email=>",email, "password==>>",password );
 const headers={
   'Content-Type':'application/json',
   'Authorizations':'bearer abcdefg'
 }
-  const auth=await axios.post('http://localhost:4000/auth/login',obj,{headers}).then(res=>res);
+  const auth=await axios.post(SLurl,obj,{headers}).then(res=>res);
   console.log(auth);
   // console.log();
   if(auth.data){
-      const headers = auth.data.authHeader;
-      Cookies.set(headers[0],headers[1], { expires: 7 });
-      console.log(headers[0]);
-      sessionStorage.setItem(headers[0],headers[1])
+      // const headers = auth.data.authHeader;
+      // Cookies.set(headers[0],headers[1], { expires: 7 });
+      // console.log(headers[0]);
+      // sessionStorage.setItem(headers[0],headers[1])
     dispatch(AuthSliceAction.login())
    navigate('/') 
   }
@@ -58,6 +69,11 @@ const headers={
           <input type="text" className="w-[100%] border border-black" id="email"/>
           <p className="font-bold text-sm">Password</p>
           <input type="password" className="w-[100%] border border-black" id="password"/>
+          { signUp && <div>
+           <p className="font-bold text-sm">Confirm Password</p>
+          <input type="password" className="w-[100%] border border-black" id="confirmPassword"/>
+          </div>
+           }
         </div>
 
         <button className="bg-yellow-400 w-full p-1 mt-3 text-sm xl:text-md rounded-lg hover:bg-yellow-500"
