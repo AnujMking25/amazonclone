@@ -1,7 +1,38 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import axios from "axios";
+import { useDispatch } from "react-redux";
+import { AuthSliceAction } from "../../../Store/AuthSlice";
+import Cookies from 'js-cookie';
+
 const SignIn = () => {
   const [signUp, setSignUp] = useState(true);
+  const navigate=useNavigate();
+ const dispatch=useDispatch()
+ const onAuthHandler=async(e)=>{
+  e.preventDefault();
+const email=e.target.email.value;
+const password=e.target.password.value;
+const obj={email,password};
+document.cookie=JSON.stringify(obj);
+console.log("Email=>",email, "password==>>",password );
+const headers={
+  'Content-Type':'application/json',
+  'Authorizations':'bearer abcdefg'
+}
+  const auth=await axios.post('http://localhost:4000/auth/login',obj,{headers}).then(res=>res);
+  console.log(auth);
+  // console.log();
+  if(auth.data){
+      const headers = auth.data.authHeader;
+      Cookies.set(headers[0],headers[1], { expires: 7 });
+      console.log(headers[0]);
+      sessionStorage.setItem(headers[0],headers[1])
+    dispatch(AuthSliceAction.login())
+   navigate('/') 
+  }
+
+ }
   return (
     <div>
       <div className="flex justify-center items-center ">
@@ -20,16 +51,21 @@ const SignIn = () => {
           <h1 className="text-3xl">{signUp? 'Sign in':'Create Account'}</h1>
         </div>
 
+        <form onSubmit={(e)=>onAuthHandler(e)}>
+        
         <div >
           <p className="font-bold text-sm">Email</p>
-          <input type="text" className="w-[100%] border border-black" />
+          <input type="text" className="w-[100%] border border-black" id="email"/>
           <p className="font-bold text-sm">Password</p>
-          <input type="text" className="w-[100%] border border-black" />
+          <input type="password" className="w-[100%] border border-black" id="password"/>
         </div>
 
-        <button className="bg-yellow-400 w-full p-1 mt-3 text-sm xl:text-md rounded-lg hover:bg-yellow-500">
+        <button className="bg-yellow-400 w-full p-1 mt-3 text-sm xl:text-md rounded-lg hover:bg-yellow-500"
+        type="submit"
+        >
           Continue
         </button>
+        </form>
 
         <div className="text-sm xl:text-md">
           <p>

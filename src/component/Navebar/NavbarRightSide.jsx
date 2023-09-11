@@ -2,13 +2,18 @@ import React from 'react'
 import {ShoppingCartIcon} from '@heroicons/react/24/outline'
 import { Link} from 'react-router-dom'
 
+
 const NavbarRightSide = () => {
+ 
   return (
     <div className="flex items-center">
     <div className="pl-4 pr-4">
+    <Link to='/signin'>
        <div className='text-xs xl:text-sm'>Hello,sign in</div>
         <div className="text-sm xl:text-base font-bold">
-        <Link to='/signin'>Accounts & Lists</Link></div>
+        <p>Accounts & Lists</p>
+        </div>
+        </Link>
     </div>
 
     <div className="pl-4 pr-4">
