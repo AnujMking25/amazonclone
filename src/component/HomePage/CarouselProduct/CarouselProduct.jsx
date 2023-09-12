@@ -5,19 +5,22 @@ import {Swiper, SwiperSlide } from 'swiper/react'
 import axios from 'axios'
     const CarouselProduct = () => {
      const [products,setProduct]=useState();
-      const getAllProducts=async()=>{
-        const getProducts=await axios('http://localhost:4000/admin/getProduct/Book');
-        // console.log(getProducts.data);
-        const currProducts=getProducts.data.map((product)=>{
-          return <SwiperSlide key={product._id}>
-          <Link to={`/product`} state={{product}}>
-          <img src={`${product.imageUrl}`} alt={product.imageUrl} />    
-          </Link>
-          </SwiperSlide>
-        })
-        setProduct(prev=>{return prev=currProducts})
-      }
+    
+      
       useEffect(()=>{
+        const getAllProducts=async()=>{
+          
+          const getProducts=await axios('http://localhost:4000/admin/getProduct/Book');
+          // console.log(getProducts.data);
+          const currProducts=getProducts.data.map((product)=>{
+            return <SwiperSlide key={product._id}>
+            <Link to={`/product`} state={{product}}>
+            <img src={`${product.imageUrl}`} alt={product.imageUrl} />    
+            </Link>
+            </SwiperSlide>
+          })
+          setProduct(prev=>{return prev=currProducts})
+        }
       getAllProducts();
      },[])
       return (

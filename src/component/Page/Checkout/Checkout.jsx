@@ -13,13 +13,17 @@ const Checkout = () => {
   }
 
   useEffect(()=>{
+    const headers={
+      Authorization:'Bearer ' + localStorage.getItem('token')
+     }
     const getCartProductI=async()=>{
-      const cartProducts=await axios('http://localhost:4000/cart');
-      // console.log(cartProducts.data);
+      const cartProducts=await axios('http://localhost:4000/cart',{headers});
+      console.log(cartProducts.data);
   
       const cart= cartProducts.data.map((cartProduct)=>{
         // console.log(cartProduct.productId);
         const cProduct=cartProduct.productId;
+        console.log(cProduct);
         const prodId=cProduct._id;
          return <div className=" grid grid-cols-10 gap-2" key={cProduct._id} >
              <div className='col-span-3 flex justify-center items-center'>

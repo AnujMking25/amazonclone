@@ -8,8 +8,12 @@ const onAddToCartHandler=async(e)=>{
 e.preventDefault();
 const prodId=product._id;
 const quantity= +selectValue;
+const headers={
+  Authorization:'Bearer ' + localStorage.getItem('token')
+ }
 console.log("AddToCart is working===>>>",prodId,quantity);
-const postProduct=await axios.post('http://localhost:4000/cart',{prodId:prodId,quantity:quantity})
+const obj={prodId:prodId,quantity:quantity}
+const postProduct=await axios.post('http://localhost:4000/cart',obj,{headers})
 console.log(postProduct.data);  
 }
   return (

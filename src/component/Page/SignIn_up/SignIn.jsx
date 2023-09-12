@@ -6,7 +6,7 @@ import { AuthSliceAction } from "../../../Store/AuthSlice";
 // import Cookies from 'js-cookie';
 
 const SignIn = () => {
-  const [signUp, setSignUp] = useState(true);
+  const [signIn, setSignIn] = useState(true);
   const navigate=useNavigate();
  const dispatch=useDispatch()
  const onAuthHandler=async(e)=>{
@@ -16,30 +16,21 @@ const password=e.target.password.value;
 let SLurl;
 let obj={email,password};
 
-if(e.target.confirmPassword.value){
+if(!signIn){
 SLurl='http://localhost:4000/auth/signup'
 const confirmPassword=e.target.confirmPassword.value;
 obj={...obj,confirmPassword};
 }else{
-  SLurl='http://localhost:4000/auth/login';
+  SLurl='http://localhost:4000/auth/signin';
 }
 
-
-// document.cookie=JSON.stringify(obj);
-// console.log("Email=>",email, "password==>>",password );
-const headers={
-  'Content-Type':'application/json',
-  'Authorizations':'bearer abcdefg'
-}
-  const auth=await axios.post(SLurl,obj,{headers}).then(res=>res);
+  const auth=await axios.post(SLurl,obj).then(res=>res);
   console.log(auth);
   // console.log();
   if(auth.data){
-      // const headers = auth.data.authHeader;
-      // Cookies.set(headers[0],headers[1], { expires: 7 });
-      // console.log(headers[0]);
-      // sessionStorage.setItem(headers[0],headers[1])
-    dispatch(AuthSliceAction.login())
+    // console.log(auth.data.token);
+    
+    dispatch(AuthSliceAction.login({token:auth.data.token}))
    navigate('/') 
   }
 
@@ -59,7 +50,7 @@ const headers={
 
       <div className="w-[30%] mx-auto border border-gray-300 rounded-lg p-6">
         <div className="mb-4">
-          <h1 className="text-3xl">{signUp? 'Sign in':'Create Account'}</h1>
+          <h1 className="text-3xl">{signIn? 'SignIn':'Create Account'}</h1>
         </div>
 
         <form onSubmit={(e)=>onAuthHandler(e)}>
@@ -69,7 +60,7 @@ const headers={
           <input type="text" className="w-[100%] border border-black" id="email"/>
           <p className="font-bold text-sm">Password</p>
           <input type="password" className="w-[100%] border border-black" id="password"/>
-          { signUp && <div>
+          { !signIn && <div>
            <p className="font-bold text-sm">Confirm Password</p>
           <input type="password" className="w-[100%] border border-black" id="confirmPassword"/>
           </div>
@@ -92,14 +83,14 @@ const headers={
         </div>
       </div>
 
-      {signUp && <div className=" mt-6 w-[30%] mx-auto text-center text-gray-500 text-sm divide-y">
+      {signIn && <div className=" mt-6 w-[30%] mx-auto text-center text-gray-500 text-sm divide-y">
         <button className="pl-2 pr-2 bg-white">New to Amazon?</button>
         <p className="-mt-2"></p>
       </div>}
 
       <div className="w-[30%] mx-auto mt-2">
-        <button onClick={()=>{setSignUp(!signUp)}} className="border border-gray-300  w-full p-1 mt-3 text-sm xl:text-md rounded-lg hover:bg-gray-200">
-         {signUp ? 'Create your Amazon account':'SignUp'}
+        <button onClick={()=>{setSignIn(!signIn)}} className="border border-gray-300  w-full p-1 mt-3 text-sm xl:text-md rounded-lg hover:bg-gray-200">
+         {signIn ? 'Create your Amazon account':'SignIn'}
         </button>
       </div>
     </div>
