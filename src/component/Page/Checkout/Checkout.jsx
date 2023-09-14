@@ -1,14 +1,21 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import ProductPageMiddle from '../Product/ProductPageMiddle';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { CartSliceAction } from '../../../Store/CartSlice';
 
 const Checkout = () => {
   const [cartItems,setCartItems]=useState();
   const isAuth=useSelector(state=>state.auth.isAuth);
+  const Tquantity=useSelector(state=>state.cartDetails.Tquantity);
+  const Tprice=useSelector(state=>state.cartDetails.Tprice)
+  const dispatch=useDispatch();
   const onCartDeleteHandler=async(prodId)=>{
     console.log('ProdId is ===>>>',prodId);
-    const deleteCartItem=await axios.delete(`http://localhost:4000/cart/${prodId}`)
+    const headers={
+       Authorization:'Bearer ' + localStorage.getItem('token')
+    }
+    const deleteCartItem=await axios.delete(`http://localhost:4000/cart/${prodId}`,{headers})
     console.log(deleteCartItem.data);
   }
 
@@ -18,10 +25,12 @@ const Checkout = () => {
      }
     const getCartProductI=async()=>{
       const cartProducts=await axios('http://localhost:4000/cart',{headers});
-      console.log(cartProducts.data);
-  
+      
+  let quantity=0;
+  let money=0
       const cart= cartProducts.data.map((cartProduct)=>{
-        // console.log(cartProduct.productId);
+        quantity=quantity +cartProduct.quantity;
+        money=money+(cartProduct.productId.price*cartProduct.quantity);
         const cProduct=cartProduct.productId;
         console.log(cProduct);
         const prodId=cProduct._id;
@@ -34,11 +43,13 @@ const Checkout = () => {
              
               </div>
       })
+      // console.log('cart data total quantity===>>>',quantity);
       // console.log(cart);
+      dispatch(CartSliceAction.cartDetails({Tquantity:quantity,Tprice:money}))
       setCartItems((prev)=>{return prev=cart})
     }
     getCartProductI();
-  },[])
+  },[dispatch])
   
   return (
     <div className=" bg-amazonclone-background">
@@ -49,7 +60,7 @@ const Checkout = () => {
             <div className="text-2xl xl:text-3xl m-4 divide-y-2 divide-gray-200 p-2">
             <div className='h-[40px]'>Shopping Cart</div>
             {isAuth && cartItems}
-            <div></div>
+            <div className='text-right'><p>SubTotal ({Tquantity} items):₹{Tprice}</p></div>
             </div>
           </div>
           {/* Checkout */}
@@ -58,13 +69,11 @@ const Checkout = () => {
               Your order qualifies for{" "}
               <span className="font-bold">FREE DELIVERY</span>. Delivery Details
             </div>
-            <div className="text-base xl:text-lg mb-4">
+            <div className="text-lg xl:text-lg mt-4 mb-4 ">
              
-              <span className="font-semibold">
-
-              </span>
+              <p>SubTotal ({Tquantity} items):<span className="font-bold">₹{Tprice}</span></p>
             </div>
-            <button >Proceed to Checkout</button>
+            <button className='bg-yellow-300 w-full p-2 mt-3 text-base xl:text-md rounded-lg hover:bg-yellow-400'>Proceed to Checkout</button>
           </div>
         </div>
       </div>

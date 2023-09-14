@@ -1,9 +1,10 @@
 import React, { useState } from 'react'
 import {IN_CURRENCY } from '../../../CallApi/constants'
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 const ProductPageRightSide = ({product}) => {
 const [selectValue,setSelectValue]=useState('1');
-
+const navigate=useNavigate();
 const onAddToCartHandler=async(e)=>{
 e.preventDefault();
 const prodId=product._id;
@@ -15,6 +16,7 @@ console.log("AddToCart is working===>>>",prodId,quantity);
 const obj={prodId:prodId,quantity:quantity}
 const postProduct=await axios.post('http://localhost:4000/cart',obj,{headers})
 console.log(postProduct.data);  
+navigate('/checkOut')
 }
   return (
     <div className='col-span-2 bg-white p-4 rounded'>

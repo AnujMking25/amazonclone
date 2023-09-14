@@ -6,7 +6,19 @@ import SearchResult from './component/Page/SearchResult/SearchResult';
 import ProductPage from './component/Page/Product/ProductPage';
 import Checkout from './component/Page/Checkout/Checkout';
 import SignIn from './component/Page/SignIn_up/SignIn';
+import axios from 'axios';
+import { useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { ProductSliceAction } from './Store/ProductSlice';
 function App() {
+  const dispatch=useDispatch()
+  useEffect(()=>{
+    (async()=>{
+      const getProducts=await axios('http://localhost:4000/admin/getProduct/All');
+      dispatch(ProductSliceAction.AllProduct({items:getProducts.data}))
+    })()
+    
+  },[dispatch])
   return (<>
   <Navbar/>
   <Routes>
