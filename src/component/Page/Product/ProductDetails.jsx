@@ -2,7 +2,7 @@ import React from 'react'
 import ProductBadge from './ProductBadge'
 import ProductRating from './ProductRating'
 const ProductDetails = ({product,ratings}) => {
-  console.log(product,'===>>>',ratings);
+  // console.log(product,'===>>>',ratings);
   return (
     <div className='mb-1'>
         <div className='text-xl xl:text-2xl font-medium mb-1 '>{product.title}</div>

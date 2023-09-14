@@ -6,20 +6,20 @@ import {Swiper, SwiperSlide } from 'swiper/react'
 
     const CarouselProduct = () => {
      const [products,setProduct]=useState();
-    const getProducts=useSelector(state=>state.productDetails.products)
+    const getProducts=useSelector(state=>state.productDetails.products).filter(item=>item.category==='Book')
       useEffect(()=>{
         const getAllProducts=async()=>{
           const currProducts=getProducts.map((product)=>{
             return <SwiperSlide key={product._id}>
             <Link to={`/product`} state={{product}}>
-            <img src={`${product.imageUrl}`} alt={product.imageUrl} />    
+            <img className='h-[220px] p-4 m-2' src={`${product.imageUrl}`} alt={product.imageUrl} />    
             </Link>
             </SwiperSlide>
           })
           setProduct(prev=>{return prev=currProducts})
         }
       getAllProducts();
-     },[getProducts])
+     },[])
       return (
         <div className='bg-white m-3'>
         <div className='text-2xl font-semibold p-3'>Best Books</div>

@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import ProductPageMiddle from '../Product/ProductPageMiddle';
 import { useDispatch, useSelector } from 'react-redux';
 import { CartSliceAction } from '../../../Store/CartSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Checkout = () => {
   const [cartItems,setCartItems]=useState();
@@ -10,16 +11,20 @@ const Checkout = () => {
   const Tquantity=useSelector(state=>state.cartDetails.Tquantity);
   const Tprice=useSelector(state=>state.cartDetails.Tprice)
   const dispatch=useDispatch();
-  const onCartDeleteHandler=async(prodId)=>{
-    console.log('ProdId is ===>>>',prodId);
-    const headers={
-       Authorization:'Bearer ' + localStorage.getItem('token')
-    }
-    const deleteCartItem=await axios.delete(`http://localhost:4000/cart/${prodId}`,{headers})
-    console.log(deleteCartItem.data);
-  }
+  const navigate=useNavigate();
+ 
 
   useEffect(()=>{
+    const onCartDeleteHandler=async(prodId)=>{
+      console.log('ProdId is ===>>>',prodId);
+      const headers={
+         Authorization:'Bearer ' + localStorage.getItem('token')
+      }
+      const deleteCartItem=await axios.delete(`http://localhost:4000/cart/${prodId}`,{headers})
+      console.log(deleteCartItem.data);
+      navigate('/checkout')
+    }
+
     const headers={
       Authorization:'Bearer ' + localStorage.getItem('token')
      }
@@ -49,7 +54,7 @@ const Checkout = () => {
       setCartItems((prev)=>{return prev=cart})
     }
     getCartProductI();
-  },[dispatch])
+  },[dispatch,navigate])
   
   return (
     <div className=" bg-amazonclone-background">
