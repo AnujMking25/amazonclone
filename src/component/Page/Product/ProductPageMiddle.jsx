@@ -1,8 +1,8 @@
 import React from 'react'
 import ProductDetails from './ProductDetails';
 
-const ProductPageMiddle = ({product,rating,onCartDelete}) => {
- 
+const ProductPageMiddle = ({product,rating,onCartDelete,quantity}) => {
+ console.log('cart Product===>>>',quantity);
   return (
     <div className='col-span-5 p-4 rounded bg-white divide-y divide-gray-400 '>
          
@@ -16,7 +16,7 @@ const ProductPageMiddle = ({product,rating,onCartDelete}) => {
           {rating &&
           <div className='flex gap-2'>
           <div className=' h-[30px] text-sm xl:text-base mt-1 w-fit border border-gray-600 rounded-lg pl-3 pr-3 pt-1 bg-amazonclone-background'>Qty:
-    <select className='bg-amazonclone-background border-0'>
+    <select className='bg-amazonclone-background border-0' defaultValue={quantity}>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>

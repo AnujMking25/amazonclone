@@ -9,7 +9,7 @@ initialState:initialState,
 reducers:{
     AllProduct(state,action){
         state.products=action.payload.items;
-        console.log('Redux',state.products)
+        // console.log('Redux',state.products)
     }
 }
 })
