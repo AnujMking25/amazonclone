@@ -7,7 +7,7 @@ const NavbarRightSide = () => {
  
   return (
     <div className="flex items-center">
-    <div className="pl-4 pr-4">
+    <div className="pl-4 pr-4 border border-black hover:border-white">
     <Link to='/signin'>
        <div className='text-xs xl:text-sm'>Hello,sign in</div>
         <div className="text-sm xl:text-base font-bold">

@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import ProductPageMiddle from "../Product/ProductPageMiddle";
 import { useDispatch, useSelector } from "react-redux";
 import { CartSliceAction } from "../../../Store/CartSlice";
-// import { useNavigate } from "react-router-dom";
+import {loadStripe} from '@stripe/stripe-js';
 
 const Checkout = () => {
   const [cartItems, setCartItems] = useState();
@@ -73,6 +73,37 @@ const Checkout = () => {
     });
     // 
   },[cartP,dispatch])
+
+const onPaymentHandler=async()=>{
+  const stripe = await loadStripe('your secret key');
+  
+  const headers={
+    "Content-Type":"application/json"
+  }
+  const body={
+    products:[{
+        quantity:3,
+        price:2000,
+        name:"No Plane B"
+        }]}
+  
+  const respose=await fetch('http://localhost:4000/payment/create-checkout-session',{
+    method:"POST",
+    headers:headers,
+    body:JSON.stringify(body)
+  });
+
+  const session=await respose.json();
+console.log('===>>>',session);
+  const result=stripe.redirectToCheckout({
+    sessionId:session.id
+  })
+ if(result.error){
+  console.log(result.error);
+ }
+
+}
+
   return (
     <div className=" bg-amazonclone-background">
       <div className="min-w-[1000px] max-w-[1500px]  pt-8">
@@ -91,6 +122,7 @@ const Checkout = () => {
           </div>
           {/* Checkout */}
           <div className="col-span-2 bg-white rounded h-[250px] p-7">
+          
             <div className="text-xs xl:text-sm text-green-800 mb-2">
               Your order qualifies for{" "}
               <span className="font-bold">FREE DELIVERY</span>. Delivery Details
@@ -101,9 +133,13 @@ const Checkout = () => {
                 <span className="font-bold">₹{Tprice}</span>
               </p>
             </div>
-            <button className="bg-yellow-300 w-full p-2 mt-3 text-base xl:text-md rounded-lg hover:bg-yellow-400">
+            <button id="order-btn"
+             className="bg-yellow-300 w-full p-2 mt-3 text-base xl:text-md rounded-lg hover:bg-yellow-400"
+             onClick={()=>onPaymentHandler()}
+             >
               Proceed to Checkout
             </button>
+           
           </div>
         </div>
       </div>

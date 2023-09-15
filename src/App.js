@@ -10,6 +10,8 @@ import axios from 'axios';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { ProductSliceAction } from './Store/ProductSlice';
+import Success from './component/Page/Payment/Success';
+import Cancle from './component/Page/Payment/Cancle';
 function App() {
   const dispatch=useDispatch()
   useEffect(()=>{
@@ -27,6 +29,8 @@ function App() {
     <Route path='/product' element={<ProductPage/>}/>
     <Route path='/checkOut' element={<Checkout/>}/>
     <Route path='/signin' element={<SignIn/>}/>
+    <Route path='/success' element={<Success/>}/>
+    <Route path='/cancle' element={<Cancle/>}/>
   </Routes>
     
   </>
