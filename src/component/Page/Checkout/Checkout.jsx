@@ -11,7 +11,7 @@ const Checkout = () => {
   const Tquantity = useSelector((state) => state.cartDetails.Tquantity);
   const Tprice = useSelector((state) => state.cartDetails.Tprice);
   const cartP = useSelector((state) => state.cartDetails.cartProducts);
-  console.log("cartP==>>", cartP);
+  // console.log("cartP==>>", cartP);
   const dispatch = useDispatch();
   // const navigate = useNavigate();
 
@@ -75,7 +75,7 @@ const Checkout = () => {
   },[cartP,dispatch])
 
 const onPaymentHandler=async()=>{
-  const stripe = await loadStripe('your secret key');
+  const stripe = await loadStripe('your Publish stripe key');
   
   const headers={
     "Content-Type":"application/json"

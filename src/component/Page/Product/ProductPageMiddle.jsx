@@ -1,8 +1,35 @@
 import React from 'react'
 import ProductDetails from './ProductDetails';
+import axios from 'axios';
+import { useDispatch } from 'react-redux';
+import { CartSliceAction } from '../../../Store/CartSlice';
 
 const ProductPageMiddle = ({product,rating,onCartDelete,quantity}) => {
- console.log('cart Product===>>>',quantity);
+  const dispatch=useDispatch();
+//  console.log('cart Product===>>>',quantity);
+ const onChangeQuantity=async (e)=>{
+  e.preventDefault()
+  const quan=e.target.value;
+  console.log(quan);
+
+  try {
+    
+    const obj={prodId:product._id,quantity:quan}
+    const headers={
+  Authorization:'Bearer ' + localStorage.getItem('token')
+ }
+  const changeQuantity=await axios.put('http://localhost:4000/cart',obj,{headers})
+  
+  if(changeQuantity.status===201){
+    dispatch(CartSliceAction.cartQuantityUpdated({prodId:product._id,quantity:quan}))
+
+  }else {
+    throw Error('Something went wrong!!! (status=500)')
+  }
+  } catch (error) {
+    console.log(error);
+  }
+ }
   return (
     <div className='col-span-5 p-4 rounded bg-white divide-y divide-gray-400 '>
          
@@ -16,7 +43,7 @@ const ProductPageMiddle = ({product,rating,onCartDelete,quantity}) => {
           {rating &&
           <div className='flex gap-2'>
           <div className=' h-[30px] text-sm xl:text-base mt-1 w-fit border border-gray-600 rounded-lg pl-3 pr-3 pt-1 bg-amazonclone-background'>Qty:
-    <select className='bg-amazonclone-background border-0' defaultValue={quantity}>
+    <select id='quan' className='bg-amazonclone-background border-0' defaultValue={quantity} onChange={(e)=>onChangeQuantity(e)}>
         <option value="1">1</option>
         <option value="2">2</option>
         <option value="3">3</option>
