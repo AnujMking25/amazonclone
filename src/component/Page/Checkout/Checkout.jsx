@@ -75,7 +75,7 @@ const Checkout = () => {
   },[cartP,dispatch])
 
 const onPaymentHandler=async()=>{
-  const stripe = await loadStripe('your Publish stripe key');
+  const stripe = await loadStripe('Your Publish Key');
   
   const headers={
     "Content-Type":"application/json"

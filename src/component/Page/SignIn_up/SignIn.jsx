@@ -13,8 +13,9 @@ const SignIn = () => {
   e.preventDefault();
 const email=e.target.email.value;
 const password=e.target.password.value;
+const name=e.target.name.value;
 let SLurl;
-let obj={email,password};
+let obj={email,password,name};
 
 if(!signIn){
 SLurl='http://localhost:4000/auth/signup'
@@ -30,7 +31,7 @@ obj={...obj,confirmPassword};
   if(auth.data){
     // console.log(auth.data.token);
     
-    dispatch(AuthSliceAction.login({token:auth.data.token}))
+    dispatch(AuthSliceAction.login({token:auth.data.token,name:auth.data.userName}))
    navigate('/') 
   }
 
@@ -56,6 +57,10 @@ obj={...obj,confirmPassword};
         <form onSubmit={(e)=>onAuthHandler(e)}>
         
         <div >
+        {!signIn && <div><p className="font-bold text-sm">Name</p>
+          <input type="text" className="w-[100%] border border-black" id="name"/>
+        </div>
+        }
           <p className="font-bold text-sm">Email</p>
           <input type="text" className="w-[100%] border border-black" id="email"/>
           <p className="font-bold text-sm">Password</p>
