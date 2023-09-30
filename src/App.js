@@ -23,7 +23,7 @@ function App() {
       dispatch(ProductSliceAction.AllProduct({items:getProducts.data}))
     })()
     
-  },[dispatch])
+  },[dispatch,BASE_URL])
   return (<>
   <Navbar/>
   <Routes>
