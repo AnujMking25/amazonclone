@@ -13,7 +13,7 @@ const PoratalPage = ({onHidePortal}) => {
 
     <div className='fixed z-40  h-full w-[370px] bg-white  duration-800'>
     <button className='float-right p-3 text-white text-3xl ' onClick={onHidePortal}>X</button>
-    <h1 className='bg-gray-900 h-[50px] text-white text-xl font-bold p-4 w-full'> Hello,{name}</h1>
+    <h1 className='bg-gray-900 h-[50px] text-white text-xl font-bold p-4 w-full'> Hello,{name ? name:' user'}</h1>
 <button onClick={onLogoutHandler}>Sign Out</button>
 
 </div>
