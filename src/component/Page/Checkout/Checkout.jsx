@@ -20,7 +20,7 @@ const Checkout = () => {
     const headers = {
       Authorization: "Bearer " + localStorage.getItem("token"),
     };
-    const getCartProductI = async () => {
+    const getCartProductI = isAuth ? async () => {
       const cartProducts = await axios("http://localhost:4000/cart", {
         headers,
       });
@@ -28,9 +28,9 @@ const Checkout = () => {
         CartSliceAction.cartDetails({ cartProducts: cartProducts.data })
       );
       
-    };
+    }:()=>null;
     getCartProductI();
-  }, [dispatch]);
+  }, [dispatch ,isAuth]);
 
   useEffect(()=>{
     const onCartDeleteHandler = async (prodId,quantity,price) => {
@@ -75,7 +75,7 @@ const Checkout = () => {
   },[cartP,dispatch])
 
 const onPaymentHandler=async()=>{
-  const stripe = await loadStripe('Your Publish Key');
+  const stripe = await loadStripe('pk_test_51NqEw1SEA04VGFlGNgFM61iQlKHDOE4XpplV0CgHSPtCRW2GRJkBTxeu6y8OH900w2t2zh8yECbjmGltM4yZvarm00PgdA7JDn');
   
   const headers={
     "Content-Type":"application/json"

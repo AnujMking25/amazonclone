@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import Portal from '../Portel/Portal';
 
 const Menu = () => {
-  const[showPortal,setShowPortal]=useState('false');
+  const[showPortal,setShowPortal]=useState(false);
   const onshowPortal=()=>{
 setShowPortal(true);
   }
