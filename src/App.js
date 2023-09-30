@@ -14,9 +14,12 @@ import Success from './component/Page/Payment/Success';
 import Cancle from './component/Page/Payment/Cancle';
 function App() {
   const dispatch=useDispatch()
+  const BASE_URL=process.env.REACT_APP_BASE_URL;
+  console.log("BaseUrl",BASE_URL);
   useEffect(()=>{
     (async()=>{
-      const getProducts=await axios('http://localhost:4000/admin/getProduct/All');
+      const getProducts=await axios(`${BASE_URL}/admin/getProduct/All`);
+      // console.log('render data ',getProducts.data);
       dispatch(ProductSliceAction.AllProduct({items:getProducts.data}))
     })()
     

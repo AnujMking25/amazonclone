@@ -9,6 +9,8 @@ const SignIn = () => {
   const [signIn, setSignIn] = useState(true);
   const navigate=useNavigate();
  const dispatch=useDispatch()
+ const BASE_URL=process.env.REACT_APP_BASE_URL;
+
  const onAuthHandler=async(e)=>{
   e.preventDefault();
 const email=e.target.email.value;
@@ -18,11 +20,11 @@ let SLurl;
 let obj={email,password,name};
 
 if(!signIn){
-SLurl='http://localhost:4000/auth/signup'
+SLurl=`${BASE_URL}/auth/signup`
 const confirmPassword=e.target.confirmPassword.value;
 obj={...obj,confirmPassword};
 }else{
-  SLurl='http://localhost:4000/auth/signin';
+  SLurl=`${BASE_URL}/auth/signin`;
 }
 
   const auth=await axios.post(SLurl,obj).then(res=>res);

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux'
 
 const NavbarRightSide = () => {
  const name=useSelector((state)=>state.auth.isName);
-console.log('=*=',name);
+// console.log('=*=',name);
  const isAuth=useSelector((state)=>state.auth.isAuth)
 //  console.log(name.split(' ')[0]);
   return (

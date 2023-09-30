@@ -6,6 +6,7 @@ import { CartSliceAction } from '../../../Store/CartSlice';
 
 const ProductPageMiddle = ({product,rating,onCartDelete,quantity}) => {
   const dispatch=useDispatch();
+  const BASE_URL=process.env.REACT_APP_BASE_URL;
 //  console.log('cart Product===>>>',quantity);
  const onChangeQuantity=async (e)=>{
   e.preventDefault()
@@ -18,7 +19,7 @@ const ProductPageMiddle = ({product,rating,onCartDelete,quantity}) => {
     const headers={
   Authorization:'Bearer ' + localStorage.getItem('token')
  }
-  const changeQuantity=await axios.put('http://localhost:4000/cart',obj,{headers})
+  const changeQuantity=await axios.put(`${BASE_URL}/cart`,obj,{headers})
   
   if(changeQuantity.status===201){
     dispatch(CartSliceAction.cartQuantityUpdated({prodId:product._id,quantity:quan}))
@@ -27,7 +28,7 @@ const ProductPageMiddle = ({product,rating,onCartDelete,quantity}) => {
     throw Error('Something went wrong!!! (status=500)')
   }
   } catch (error) {
-    console.log(error);
+    // console.log(error);
   }
  }
   return (

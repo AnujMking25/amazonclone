@@ -11,9 +11,9 @@ const Checkout = () => {
   const Tquantity = useSelector((state) => state.cartDetails.Tquantity);
   const Tprice = useSelector((state) => state.cartDetails.Tprice);
   const cartP = useSelector((state) => state.cartDetails.cartProducts);
-  // console.log("cartP==>>", cartP);
+  const BASE_URL=process.env.REACT_APP_BASE_URL;
+  console.log("cartP==>>", cartP);
   const dispatch = useDispatch();
-  // const navigate = useNavigate();
 
   useEffect(() => {
     
@@ -21,7 +21,7 @@ const Checkout = () => {
       Authorization: "Bearer " + localStorage.getItem("token"),
     };
     const getCartProductI = isAuth ? async () => {
-      const cartProducts = await axios("http://localhost:4000/cart", {
+      const cartProducts = await axios(`${BASE_URL}/cart`, {
         headers,
       });
       dispatch(
@@ -30,19 +30,19 @@ const Checkout = () => {
       
     }:()=>null;
     getCartProductI();
-  }, [dispatch ,isAuth]);
+  }, [dispatch ,isAuth,BASE_URL]);
 
   useEffect(()=>{
     const onCartDeleteHandler = async (prodId,quantity,price) => {
-      console.log("ProdId is ===>>>", prodId);
+      // console.log("ProdId is ===>>>", prodId);
       const headers = {
         Authorization: "Bearer " + localStorage.getItem("token"),
       };
       const deleteCartItem = await axios.delete(
-        `http://localhost:4000/cart/${prodId}`,
+        `${BASE_URL}/cart/${prodId}`,
         { headers }
       );
-      console.log(deleteCartItem.data);
+      // console.log(deleteCartItem.data);
       dispatch(CartSliceAction.cartProductDelete({ prodId: prodId,quantity:quantity,price:price }));
       // navigate("/checkout");
     };
@@ -72,34 +72,31 @@ const Checkout = () => {
       return (prev = cart);
     });
     // 
-  },[cartP,dispatch])
+  },[cartP,dispatch,BASE_URL])
 
 const onPaymentHandler=async()=>{
-  const stripe = await loadStripe('pk_test_51NqEw1SEA04VGFlGNgFM61iQlKHDOE4XpplV0CgHSPtCRW2GRJkBTxeu6y8OH900w2t2zh8yECbjmGltM4yZvarm00PgdA7JDn');
+  const stripe = await loadStripe("pk_test_51NqEw1SEA04VGFlGNgFM61iQlKHDOE4XpplV0CgHSPtCRW2GRJkBTxeu6y8OH900w2t2zh8yECbjmGltM4yZvarm00PgdA7JDn");
   
   const headers={
     "Content-Type":"application/json"
   }
+  console.log("This is cartdetails",cartP);
   const body={
-    products:[{
-        quantity:3,
-        price:2000,
-        name:"No Plane B"
-        }]}
+    products:cartP}
   
-  const respose=await fetch('http://localhost:4000/payment/create-checkout-session',{
+  const respose=await fetch(`${BASE_URL}/payment/create-checkout-session`,{
     method:"POST",
     headers:headers,
     body:JSON.stringify(body)
   });
 
   const session=await respose.json();
-console.log('===>>>',session);
+// console.log('===>>>',session);
   const result=stripe.redirectToCheckout({
     sessionId:session.id
   })
  if(result.error){
-  console.log(result.error);
+  // console.log(result.error);
  }
 
 }
