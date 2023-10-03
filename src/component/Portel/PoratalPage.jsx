@@ -4,7 +4,7 @@ import { AuthSliceAction } from '../../Store/AuthSlice';
 
 const PoratalPage = ({onHidePortal}) => {
     const name=useSelector(state=>state.auth.isName);
-    
+    console.log("User name",name);
     const dispatch=useDispatch();    
     const onLogoutHandler=()=>{
         dispatch (AuthSliceAction.logout())

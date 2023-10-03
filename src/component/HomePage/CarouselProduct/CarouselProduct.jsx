@@ -19,7 +19,7 @@ import {Swiper, SwiperSlide } from 'swiper/react'
           setProduct(prev=>{return prev=currProducts})
         }
       getAllProducts();
-     },[])
+     },[getProducts])
       return (
         <div className='bg-white m-3'>
         <div className='text-2xl font-semibold p-3'>Best Books</div>

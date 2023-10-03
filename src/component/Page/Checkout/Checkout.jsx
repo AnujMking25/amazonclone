@@ -42,15 +42,12 @@ const Checkout = () => {
         `${BASE_URL}/cart/${prodId}`,
         { headers }
       );
-      // console.log(deleteCartItem.data);
       dispatch(CartSliceAction.cartProductDelete({ prodId: prodId,quantity:quantity,price:price }));
-      // navigate("/checkout");
     };
 
-    // 
     const cart = cartP.map((cartProduct) => {
       const cProduct = cartProduct.productId;
-      // console.log(cProduct);
+
       const prodId = cProduct._id;
       return (
         <div className=" grid grid-cols-10 gap-2" key={cProduct._id}>
@@ -91,12 +88,11 @@ const onPaymentHandler=async()=>{
   });
 
   const session=await respose.json();
-// console.log('===>>>',session);
   const result=stripe.redirectToCheckout({
     sessionId:session.id
   })
  if(result.error){
-  // console.log(result.error);
+  alert("Something went worng!!! Try again later")
  }
 
 }

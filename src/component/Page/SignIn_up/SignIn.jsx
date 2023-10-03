@@ -32,7 +32,7 @@ obj={...obj,confirmPassword};
   // console.log();
   if(auth.data){
     // console.log(auth.data.token);
-    
+    alert(auth.data.message)
     dispatch(AuthSliceAction.login({token:auth.data.token,name:auth.data.userName}))
    navigate('/') 
   }
